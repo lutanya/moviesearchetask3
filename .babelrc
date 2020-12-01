@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "exclude": [
+          "transform-async-to-generator",
+          "transform-regenerator"
+        ]
+      }
+    ],
+    "@babel/react"
+  ],
+  "plugins": [
+    [
+      "module:fast-async",
+      {
+        "spec": true
+      }
+     
+    ],
+    [ "babel-plugin-styled-components",
+      {
+        "ssr": false
+      }]
+  ]
+}
