@@ -29,8 +29,8 @@ function fetchByGenre(genre,setMovies) {
 
     let url = new URL("http://localhost:4000/movies");
     if (genre == 'ALL') {
-        getData(url).then((jsonResponse) =>
-            console.log(jsonResponse.data));
+        getData(url).then((json) =>
+        setMovies(json.data));
     } else {
         const params = { searchBy:'genres', search: genre.toLowerCase() };
         Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
@@ -42,9 +42,7 @@ function fetchByGenre(genre,setMovies) {
 
 
 export function FilterButton({ label, setMovies }) {
-
     return (
-
-        <StyledFilterButton onClick={fetchByGenre(label, setMovies)}>{label}</StyledFilterButton>
+        <StyledFilterButton onClick={()=>fetchByGenre(label, setMovies)}>{label}</StyledFilterButton>
     );
 }
