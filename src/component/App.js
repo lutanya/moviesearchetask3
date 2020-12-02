@@ -5,21 +5,8 @@ import { Header } from './header/Header';
 import { SearchPane } from './maincomponent/SearchPane';
 import { MovieList } from './maincomponent/MovieList';
 import { Footer } from './footer/Footer';
-
-import styled from "styled-components";
-
-const BaseComponent = styled.div`
-margin: 50px auto;
-max-width: 1230px;
-color: #FFFFFF;
-`;
-
-const MainComponent = styled.div`
-background-color: #232323;
-float: left;
-padding-left: 60px;
-position: relative;
-`;
+import { ErrorBoundary } from './common/ErrorBoundary'
+import { StyledApp, StyledMain } from "../style/StyledApp.js";
 
 async function getData(url) {
   const response = await fetch(url, {
@@ -45,14 +32,16 @@ function App() {
   }, []);
 
   return (
-    <BaseComponent>
+    <StyledApp>
       <Header />
-      <MainComponent>
-        <SearchPane setMovies={setMovies}/>
-        <MovieList movies={movies} />
-      </MainComponent>
+      <ErrorBoundary>
+        <StyledMain>
+          <SearchPane setMovies={setMovies} />
+          <MovieList movies={movies} />
+        </StyledMain>
+      </ErrorBoundary>
       <Footer />
-    </BaseComponent>
+    </StyledApp>
   );
 }
 

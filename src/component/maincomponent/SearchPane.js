@@ -1,35 +1,21 @@
-import React,{useEffect} from "react";
-import styled, { css } from "styled-components";
-import {FilterButton} from '../common/FilterButton';
+import React, { useEffect } from "react";
+import { FilterButton } from '../common/FilterButton';
+import { StyledUl } from "../../style/StyledFilterButton.js";
 
-const Ul = styled.ul`
-list-style-type: none;
-padding: 0;
-${props => props.align_right &&
-    css`
-    position: absolute;
-    right: 60px; top: 0px;
-`}
-`;
-
-const Li = styled.li`
-display:inline-block;
-margin-right: 30px;
-`;
-
-export function SearchPane({setMovies}) {
+export function SearchPane({ setMovies }) {
   return (
     <>
-      <Ul>
-        <Li><FilterButton setMovies={setMovies} label='ALL'/></Li>
-        <Li><FilterButton setMovies={setMovies} label='DOCUMENTARY'/></Li>
-        <Li><FilterButton  setMovies={setMovies} label='COMEDY'/></Li>
-        <Li><FilterButton setMovies={setMovies} label='HORROR'/></Li>
-        <Li><FilterButton setMovies={setMovies} label='CRIME'/></Li>
-      </Ul><Ul align_right>
-        <Li>SORT BY</Li>
-        <Li><FilterButton label='RELEASE DATE'/></Li>
-      </Ul>
+      <StyledUl>
+        <li><FilterButton setMovies={setMovies} label='ALL' /></li>
+        <li><FilterButton setMovies={setMovies} label='DOCUMENTARY' /></li>
+        <li><FilterButton setMovies={setMovies} label='COMEDY' /></li>
+        <li><FilterButton setMovies={setMovies} label='HORROR' /></li>
+        <li><FilterButton setMovies={setMovies} label='CRIME' /></li>
+      </StyledUl>
+      <StyledUl align_right>
+        <li>SORT BY</li>
+        <li><FilterButton setMovies={setMovies} label='RELEASE DATE' /></li>
+      </StyledUl>
     </>
   );
 }

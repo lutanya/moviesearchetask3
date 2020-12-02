@@ -1,6 +1,7 @@
-import React from "react";
+import React, { PureComponent } from "react";
+import "../../style/logo.css";
 
-export class Logo extends React.PureComponent {
+export class Logo extends PureComponent {
   render() {
     return React.createElement(
       "div",

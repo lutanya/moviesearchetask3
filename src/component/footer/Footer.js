@@ -1,12 +1,12 @@
 import React from "react";
-
-import {Logo} from '../common/Logo';
+import { Logo } from '../common/Logo';
+import { StyledFooter } from "../../style/StyledFooter.js";
 
 export function Footer() {
   return (
-    <footer className="movie-footer">
+    <StyledFooter>
       <Logo />
-    </footer>
+    </StyledFooter>
   );
 }
 
