@@ -1,24 +1,25 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import Background from './image-not-found.jpg';
 
 export const StyledMovieCard = styled.div`
     margin: 5px;
     float: left;
     width: 325px;
     height: 606px;
-    margin-right: 50px;
-
+    margin-right: 50px;  
+    background-image: url(${Background});
     > img {
+        
         width: 100%;
         height: auto;
     }
 `;
 
-
 export const StyledDescription = styled.div`
+width: 325px;
     padding-bottom: 15px;
     text-align: left;
-    position: relative;
-    bottom: 10px;
+    position: absolute;
     > h3 {
         font-weight:normal;
         margin-bottom: 5px;

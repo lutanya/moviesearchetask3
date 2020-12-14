@@ -1,14 +1,18 @@
-import React from "react";
-
+import React, { useState } from 'react';
 import { Logo } from '../common/Logo';
-import { Button } from '../common/Button';
-import { StyledHeader, SearchArea, StyledAddButton } from "../../style/StyledHeader.js";
+import { Button } from '../button/Button';
+import { StyledHeader, SearchArea, StyledAddButton } from './StyledHeader.js';
+import ModalEditMovie from '../modal/AddMoviePopup';
+import { connect } from 'react-redux';
+import { openModalByType } from '../action';
 
-export const Header = () => {
+
+const Header = ({handleOpenModal}) => {
   return (
     <StyledHeader>
       <Logo />
-      <Button label="+ ADD MOVIE" action={addMovie} position={StyledAddButton} />
+      <Button label="+ADD MOVIE" position={StyledAddButton} action={() => handleOpenModal('add', 'ADD MOVIE')} />
+      <ModalEditMovie/>
       <p>FIND YOUR MOVIE</p>
       <SearchArea>
         <input placeholder='What do you want to watch?' />
@@ -18,11 +22,37 @@ export const Header = () => {
   );
 };
 
-function searchMovie(e) {
-  console.log("searching...");
+
+/**
+ * @param {event} event search movie event
+ */
+function searchMovie(event) {
+  console.log('searching...');
 }
 
-function addMovie(e) {
-  console.log("adding...");
+
+
+/**
+ * @param {event} event click on reset button event
+ */
+function resetInputs(event) {
+  console.log('undoInputs...');
 }
 
+/**
+ * @param {event} event click on submit button event
+ */
+function addMovie(event) {
+  console.log('undoInputs...');
+}
+
+/**
+ * @param dispatch
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    handleOpenModal: (type, title) => dispatch(openModalByType(type, title)),
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Header);

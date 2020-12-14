@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, {css} from 'styled-components';
 
 export const StyledHeader = styled.header`
     background-color: #232323;
@@ -28,10 +28,11 @@ export const SearchArea = styled.div`
     border-radius: 4px; 
     background-color #555555;
     color: #FFFFFF;
+    margin-right: 20px 
 }
 `;
 
 export const StyledAddButton = css`
   position: absolute;
   right: 40px; top: 15px;
-`
+`;
