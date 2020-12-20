@@ -21,6 +21,7 @@
     left: 30%;
     padding: 70px 90px 170px 90px;
     font-size: 2em;
+    z-index: 2;
 }
   
 .close{

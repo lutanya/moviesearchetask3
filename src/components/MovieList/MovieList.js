@@ -1,25 +1,41 @@
-import React, {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
-import {MovieCard} from './MovieCard';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchByGenre} from '../../redux/action';
+import {getMovies, getMoviesError, getMoviesLoading} from '../../redux/reducers/filter';
+import {MovieCard} from '../MovieCard/MovieCard';
 
 /**
  * @return {Element} galery of the movies
  * @param {Array} movies a list with the movies
  */
-export default function MovieList({movies}) {
-  const [moviesCounter, setMoviesCounter] = useState([]);
-  useEffect(() => setMoviesCounter(movies.length));
+function MovieList({movies, fetchMovies, loading}) {
+  useEffect(() => fetchMovies(), []);
+  const moviesCounter = useMemo(() => movies.length, [movies.length]);
+  if (loading) {
+    return <>loading...</>;
+  };
   return (
     <>
       <p>{moviesCounter} movies found</p>
       {movies.map((movie) => (
-        <MovieCard key={movie.id} index={movie.id} title={movie.title} src={movie.poster_path} genresList={movie.genres} release={movie.release_date} />
+        <MovieCard key={movie.id} movie={movie} />
       ),
       )}
     </>
   );
 }
 
-MovieList.propTypes = {
-  movies: PropTypes.array.isRequired,
-};
+
+const mapStateToProps = (state) => ({
+  error: getMoviesError(state),
+  movies: getMovies(state),
+  loading: getMoviesLoading(state),
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  fetchMovies: fetchByGenre,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MovieList);
+

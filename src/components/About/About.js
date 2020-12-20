@@ -1,9 +1,8 @@
 import React, {lazy, Component} from 'react';
-import Header from '../Header/Header';
 import {SearchPane} from '../SearchPane/SearchPane';
 import {Footer} from '../Footer/Footer';
 import {ErrorBoundary} from '../Errorboundary/ErrorBoundary';
-import {StyledApp, StyledMain} from './StyledApp';
+import {StyledApp, StyledMain} from '../App/StyledApp';
 //import MovieList from '../MovieList/MovieList';
 import ModalConductor from '../ModalManager/ModalManager';
 
@@ -17,7 +16,7 @@ export default class App extends Component {
   render() {
     return (
       <StyledApp>
-        <Header className='header'/>
+        <MovieDetails/>
         <ErrorBoundary>
           <StyledMain>
             <SearchPane />

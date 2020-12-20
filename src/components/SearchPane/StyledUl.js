@@ -1,12 +1,5 @@
 import styled, {css} from 'styled-components';
 
-export const StyledFilterButton = styled.button`
-    border: none;
-    background-color: transparent;
-    color: inherit;
-    padding: 0;
-`;
-
 export const StyledUl = styled.ul`
     list-style-type: none;
     padding: 0;

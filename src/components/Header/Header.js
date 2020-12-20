@@ -1,17 +1,17 @@
 import React from 'react';
 import {Logo} from '../Logo/Logo';
-import {Button} from '../button/Button';
+import {Button} from '../Button/Button';
 import {StyledHeader, SearchArea, StyledAddButton} from './StyledHeader.js';
 import {connect} from 'react-redux';
 import {openModalByType} from '../../redux/action';
+import './header.css';
+import PropTypes from 'prop-types';
 
-
-const Header = ({handleOpenModal}) => {
+const Header = ({className, handleOpenModal}) => {
   return (
-    <StyledHeader>
+    <StyledHeader className={className}>
       <Logo />
-      <Button label="+ADD MOVIE" position={StyledAddButton} action={() => handleOpenModal('add', 'ADD MOVIE')} />
-
+      <Button label="+ADD MOVIE" position={StyledAddButton} action={() => handleOpenModal('add')} />
       <p>FIND YOUR MOVIE</p>
       <SearchArea>
         <input placeholder='What do you want to watch?' />
@@ -21,7 +21,6 @@ const Header = ({handleOpenModal}) => {
   );
 };
 
-
 /**
  * @param {event} event search movie event
  */
@@ -29,28 +28,17 @@ function searchMovie(event) {
   console.log('searching...');
 }
 
-
-/**
- * @param {event} event click on reset button event
- */
-function resetInputs(event) {
-  console.log('undoInputs...');
-}
-
-/**
- * @param {event} event click on submit button event
- */
-function addMovie(event) {
-  console.log('undoInputs...');
-}
-
 /**
  * @param dispatch
  */
 function mapDispatchToProps(dispatch) {
   return {
-    handleOpenModal: (type, title) => dispatch(openModalByType(type, title)),
+    handleOpenModal: (type) => dispatch(openModalByType(type)),
   };
 }
 
 export default connect(null, mapDispatchToProps)(Header);
+
+Header.propTypes = {
+  className: PropTypes.string,
+};

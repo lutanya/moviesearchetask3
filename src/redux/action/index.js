@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import {
   FETCH_BY_GENRE_SUCCESS,
@@ -11,18 +10,18 @@ export const fetchByGenre = (genre) => {
     dispatch(fetchByGenreStarted());
     const url = new URL('http://localhost:4000/movies');
     if (genre != undefined && genre != 'ALL') {
-      const params = {searchBy: 'genres', search: genre.toLowerCase()};
+      const params = { searchBy: 'genres', search: genre.toLowerCase() };
       Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
     }
     axios
-        .get(url)
-        .then((res) => {
-          console.log('from client', res.data.data);
-          dispatch(fetchByGenreSuccess(res.data.data));
-        })
-        .catch((err) => {
-          dispatch(fetchByGenreFailure(err.message));
-        });
+      .get(url)
+      .then((res) => {
+        console.log('from client', res.data.data);
+        dispatch(fetchByGenreSuccess(res.data.data));
+      })
+      .catch((err) => {
+        dispatch(fetchByGenreFailure(err.message));
+      });
   };
 };
 
@@ -31,17 +30,17 @@ export const fetchBySortParam = (sortParam) => {
     dispatch(fetchByGenreStarted());
     const url = new URL('http://localhost:4000/movies');
 
-    const params = {sortBy: sortParam.toLowerCase().replace(' ', '_'), sortOrder: 'desc'};
+    const params = { sortBy: sortParam.toLowerCase().replace(' ', '_'), sortOrder: 'desc' };
     Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
     axios
-        .get(url)
-        .then((res) => {
-          console.log('from client', res.data.data);
-          dispatch(fetchByGenreSuccess(res.data.data));
-        })
-        .catch((err) => {
-          dispatch(fetchByGenreFailure(err.message));
-        });
+      .get(url)
+      .then((res) => {
+        console.log('from client', res.data.data);
+        dispatch(fetchByGenreSuccess(res.data.data));
+      })
+      .catch((err) => {
+        dispatch(fetchByGenreFailure(err.message));
+      });
   };
 };
 
@@ -61,11 +60,27 @@ const fetchByGenreFailure = (error) => ({
   },
 });
 
-export const openModalByType = (type, title) => ({
+export const openModalByType = (type, movie) => ({
   type: 'OPEN_MODAL_BY_TYPE',
-  playload: [type, title],
+  modalType: type,
+  movie: movie !== undefined ?
+    {
+      'TITLE': movie.title,
+      'RELEASE DATE': movie.release_date,
+      'MOVIE URL': movie.poster_path,
+      'GENRE': movie.genres,
+      'OVERVIEW': '',
+      'RUNTIME': ''
+    } :
+    null
 });
 
 export const closeModal = () => ({
   type: 'CLOSE_MODAL_BY_TYPE',
 });
+
+export const handleInputChange = (value, label) => ({
+  type: 'CHANGE_INPUT_VALUE',
+  label: label,
+  value: value,
+})

@@ -9,7 +9,7 @@ import {StyledEditMenu} from './StyledEditMenu';
 
 const ITEM_HEIGHT = 48;
 
-function LongMenu({handleOpenModal, movieIndex}) {
+function LongMenu({handleOpenModal, movie}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -21,8 +21,8 @@ function LongMenu({handleOpenModal, movieIndex}) {
     setAnchorEl(null);
   };
 
-  const handleOpen = (type, title, index) => {
-    handleOpenModal(type, title, index);
+  const handleOpen = (type, title, movie) => {
+    handleOpenModal(type, title, movie);
     setAnchorEl(null);
   };
 
@@ -49,8 +49,8 @@ function LongMenu({handleOpenModal, movieIndex}) {
           },
         }}
       >
-        <MenuItem onClick={()=>handleOpen('edit', 'EDIT MOVIE', movieIndex)}>Edit</MenuItem>
-        <MenuItem onClick={()=>handleOpen('delete', 'DELETE MOVIE', movieIndex)}>Delete</MenuItem>
+        <MenuItem onClick={()=>handleOpen('edit', movie)}>Edit</MenuItem>
+        <MenuItem onClick={()=>handleOpen('delete')}>Delete</MenuItem>
       </Menu>
     </StyledEditMenu>
   );
@@ -61,7 +61,7 @@ function LongMenu({handleOpenModal, movieIndex}) {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    handleOpenModal: (type, title) => dispatch(openModalByType(type, title)),
+    handleOpenModal: (type, movie) => dispatch(openModalByType(type, movie)),
   };
 }
 

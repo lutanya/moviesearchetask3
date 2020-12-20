@@ -1,15 +1,21 @@
 import React from 'react';
 import {Logo} from '../Logo/Logo';
-import {StyledFooter} from './StyledFooter.js';
+import './footer.css';
+import PropTypes from 'prop-types';
 
 /**
  * @return {Element} footer of the app
  */
-export function Footer() {
+export function Footer({className}) {
   return (
-    <StyledFooter>
+    <footer className={className}>
       <Logo />
-    </StyledFooter>
+    </footer>
   );
 }
+
+Footer.propTypes = {
+  className: PropTypes.string,
+};
+
 

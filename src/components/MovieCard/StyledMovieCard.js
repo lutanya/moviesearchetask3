@@ -1,24 +1,19 @@
 import styled from 'styled-components';
-import Background from './image-not-found.jpg';
 
-export const StyledMovieCard = styled.div`
+
+export const StyledMovieCard = styled.a`
     margin: 5px;
     float: left;
     width: 325px;
     height: 606px;
-    margin-right: 50px;  
-    background-image: url(${Background});
-    > img {        
-        width: 100%;
-        height: auto;
-    }
+    margin-right: 50px;      
 `;
 
 export const StyledDescription = styled.div`
     width: 325px;
     padding-bottom: 15px;
     text-align: left;
-    position: absolute;
+    position: relative;
     > h3 {
         font-weight:normal;
         margin-bottom: 5px;
@@ -28,7 +23,7 @@ export const StyledDescription = styled.div`
     }
     > div {
         position: absolute;
-        right: 0; top: 0px;
+        right: 0; bottom: 55px;
         border: solid #FFFFFF 1px;
         border-radius: 4px;
         padding: 4px 12px;

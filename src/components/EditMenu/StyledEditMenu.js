@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const StyledEditMenu = styled('div')` 
     .MuiIconButton-root{
-         color: #FFFFFF;
+         color: #FFFFFF;         
     }
     .MuiButtonBase-root{
          background: #232323;
@@ -9,6 +9,7 @@ export const StyledEditMenu = styled('div')`
          padding: 0px;
          margin-top: 20px; 
          margin-left: 270px; 
+         z-index:1;
     }
     .MuiSvgIcon-root{
          background: #232323;

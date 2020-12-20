@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './MovieEditModal.css';
 
 const modalRoot = document.getElementById('modal-root');
 
@@ -18,8 +17,8 @@ export class Modal extends React.Component {
     modalRoot.removeChild(this.el);
   }
   render() {
-    this.props.show? this.el.style.visibility='visible': this.el.style.visibility='hidden';
-    return ReactDOM.createPortal(
+    return !this.props.show?  null :
+    ReactDOM.createPortal(
         this.props.children,
         this.el,
     );

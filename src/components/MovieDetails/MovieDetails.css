@@ -1,0 +1,12 @@
+.movie-details{
+    background-color: #232323;
+    height: 300px;
+    padding: 2% 5%;
+    font-size: 130%;
+    position: absolute;
+    margin-top: 10px;
+    z-index: 100;
+    top: -400px;
+    right: 0px;
+}
+
