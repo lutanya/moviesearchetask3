@@ -1,17 +1,18 @@
 import React from 'react';
-import {Logo} from '../Logo/Logo';
-import {Button} from '../Button/Button';
-import {StyledHeader, SearchArea, StyledAddButton} from './StyledHeader.js';
-import {connect} from 'react-redux';
-import {openModalByType} from '../../redux/action';
+import { Logo } from '../Logo/Logo';
+import { Button } from '../Button/Button';
+import { StyledHeader, SearchArea, StyledAddButton } from './StyledHeader.js';
+import { connect } from 'react-redux';
+import { openModalByType } from '../../redux/action';
 import './header.css';
 import PropTypes from 'prop-types';
 
-const Header = ({className, handleOpenModal}) => {
+const Header = ({ className, handleOpenModal }) => {
+  const openModal = () => handleOpenModal('add');
   return (
     <StyledHeader className={className}>
       <Logo />
-      <Button label="+ADD MOVIE" position={StyledAddButton} action={() => handleOpenModal('add')} />
+      <Button label="+ADD MOVIE" position={StyledAddButton} action={openModal} />
       <p>FIND YOUR MOVIE</p>
       <SearchArea>
         <input placeholder='What do you want to watch?' />

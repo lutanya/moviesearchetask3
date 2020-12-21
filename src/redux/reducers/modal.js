@@ -7,7 +7,7 @@ const initialState = {
     'MOVIE URL': '',
     'GENRE': '',
     'OVERVIEW': '',
-    'RUNTIME': ''
+    'RUNTIME': '',
   },
 };
 
@@ -35,7 +35,7 @@ export default function modal(state = initialState, action) {
             movie: {
               ...state.movie,
               TITLE: action.value,
-            }
+            },
           };
       };
     default: return state;

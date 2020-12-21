@@ -5,12 +5,12 @@ export const StyledHeader = styled.header`
     height: 400px;
     padding: 2% 5%;
     font-size: 130%;
-> p {
+     p {
         font-size: 2em;
         padding: 1% 5%; 
         position:  absolute;
         font-weight: 100;
-}
+    }
 `;
 
 

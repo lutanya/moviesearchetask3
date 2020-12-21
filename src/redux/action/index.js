@@ -10,18 +10,18 @@ export const fetchByGenre = (genre) => {
     dispatch(fetchByGenreStarted());
     const url = new URL('http://localhost:4000/movies');
     if (genre != undefined && genre != 'ALL') {
-      const params = { searchBy: 'genres', search: genre.toLowerCase() };
+      const params = {searchBy: 'genres', search: genre.toLowerCase()};
       Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
     }
     axios
-      .get(url)
-      .then((res) => {
-        console.log('from client', res.data.data);
-        dispatch(fetchByGenreSuccess(res.data.data));
-      })
-      .catch((err) => {
-        dispatch(fetchByGenreFailure(err.message));
-      });
+        .get(url)
+        .then((res) => {
+          console.log('from client', res.data.data);
+          dispatch(fetchByGenreSuccess(res.data.data));
+        })
+        .catch((err) => {
+          dispatch(fetchByGenreFailure(err.message));
+        });
   };
 };
 
@@ -30,17 +30,17 @@ export const fetchBySortParam = (sortParam) => {
     dispatch(fetchByGenreStarted());
     const url = new URL('http://localhost:4000/movies');
 
-    const params = { sortBy: sortParam.toLowerCase().replace(' ', '_'), sortOrder: 'desc' };
+    const params = {sortBy: sortParam.toLowerCase().replace(' ', '_'), sortOrder: 'desc'};
     Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
     axios
-      .get(url)
-      .then((res) => {
-        console.log('from client', res.data.data);
-        dispatch(fetchByGenreSuccess(res.data.data));
-      })
-      .catch((err) => {
-        dispatch(fetchByGenreFailure(err.message));
-      });
+        .get(url)
+        .then((res) => {
+          console.log('from client', res.data.data);
+          dispatch(fetchByGenreSuccess(res.data.data));
+        })
+        .catch((err) => {
+          dispatch(fetchByGenreFailure(err.message));
+        });
   };
 };
 
@@ -70,9 +70,9 @@ export const openModalByType = (type, movie) => ({
       'MOVIE URL': movie.poster_path,
       'GENRE': movie.genres,
       'OVERVIEW': '',
-      'RUNTIME': ''
+      'RUNTIME': '',
     } :
-    null
+    null,
 });
 
 export const closeModal = () => ({
@@ -83,4 +83,4 @@ export const handleInputChange = (value, label) => ({
   type: 'CHANGE_INPUT_VALUE',
   label: label,
   value: value,
-})
+});

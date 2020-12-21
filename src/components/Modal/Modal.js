@@ -17,11 +17,11 @@ export class Modal extends React.Component {
     modalRoot.removeChild(this.el);
   }
   render() {
-    return !this.props.show?  null :
-    ReactDOM.createPortal(
-        this.props.children,
-        this.el,
-    );
+    return !this.props.show ? null :
+      ReactDOM.createPortal(
+          this.props.children,
+          this.el,
+      );
   }
 }
 

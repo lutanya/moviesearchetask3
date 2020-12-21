@@ -1,25 +1,27 @@
-import React from 'react';
-import './MovieEditModal.css';
+import React, { useCallback } from 'react';
+import './ModalConductor.css';
 import AddMoviePopup from '../AddMoviePopup/AddMoviePopup';
 import EditMoviePopup from '../EditMoviePopup/EditMoviePopup';
 import EditMenu from '../EditMenu/EditMenu';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import DeleteMoviePopup from '../DeleteMoviePopup/DeleteMoviePopup';
-import { Modal } from '../Modal/Modal';
-import { closeModal } from '../../redux/action';
+import {Modal} from '../Modal/Modal';
+import {closeModal} from '../../redux/action';
+import PropTypes from 'prop-types';
 
-const ModalConductor = ({ currentModal, show, handleCloseModal, movie }) => {
+const ModalConductor = ({currentModal, show, handleCloseModal, movie}) => {
+  const closeModal=()=>handleCloseModal();
   switch (currentModal) {
     case 'add':
       return (
         <Modal show={show}>
           <div className="modal-content">
-            <span className="close" onClick={() => handleCloseModal()}>x</span>
+            <span className="close" onClick={closeModal}>x</span>
             ADD MOVIE
             <AddMoviePopup movie={movie} />
           </div>
         </Modal>
-      )
+      );
     case 'menu':
       return <EditMenu />;
 
@@ -27,30 +29,37 @@ const ModalConductor = ({ currentModal, show, handleCloseModal, movie }) => {
       return (
         <Modal show={show}>
           <div className="modal-content">
-            <span className="close" onClick={() => handleCloseModal()}>x</span>
+            <span className="close" onClick={closeModal}>x</span>
             EDIT MOVIE
             <EditMoviePopup movie={movie} />
           </div>
         </Modal>
-      )
+      );
     case 'delete':
       return (
         <Modal show={show}>
           <div className="modal-content">
-            <span className="close" onClick={() => handleCloseModal()}>x</span>
+            <span className="close" onClick={closeModal}>x</span>
         EDIT MOVIE<DeleteMoviePopup />
           </div>
         </Modal>
-      )
+      );
     default:
       return null;
   }
 };
 
+ModalConductor.propTypes = {
+  currentModal: PropTypes.string.isRequired,
+  show: PropTypes.bool.isRequired,
+  handleCloseModal: PropTypes.func.isRequired,
+  movie: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = (state) => ({
   currentModal: state.modal.modalType,
   show: state.modal.show,
-  movie: state.modal.movie
+  movie: state.modal.movie,
 });
 
 /**

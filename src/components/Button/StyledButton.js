@@ -7,23 +7,22 @@ export const StyledButton = styled('button')`
     color: #F65261;
     padding: 0.5em 1em;
     font-size: inherit;
-  ${(props) => props.colored &&
+    ${(props) => props.colored &&
     css`
         background: #F65261;
         color: #FFFFFF;
         padding: 0.8em 0;
         width:240px; 
         border: solid 2px #F65261; 
-`}
-${(props) => props.position}
-${(props) => props.empty &&
-  css`
+    `}
+    ${(props) => props.position}
+    ${(props) => props.empty &&
+    css`
         background: #424242;
         border: solid 2px #F65261;
         color: #F65261;  
         padding: 0.8em 0;
-  `
-}
+    `}
 `;
 
 export const StyledResetButton = css`

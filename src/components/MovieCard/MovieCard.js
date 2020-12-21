@@ -1,9 +1,10 @@
-import React, {Component, useMemo, useState} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import LongMenu from '../EditMenu/EditMenu.js';
 import {StyledMovieCard, StyledDescription} from './StyledMovieCard.js';
 import PropTypes from 'prop-types';
 import {StyledImg} from './StyledImg.js';
-import { MovieDetails } from '../MovieDetails/MovieDetails.js';
+import {MovieDetails} from '../MovieDetails/MovieDetails.js';
+import {useToggle} from '../useToggle/useToggle.js';
 
 /**
  * @param {string} src Image url
@@ -13,19 +14,22 @@ import { MovieDetails } from '../MovieDetails/MovieDetails.js';
  * @return {Component} Film card
  */
 export function MovieCard({movie}) {
-  const genres = useMemo(()=>movie.genres.length == 2 ? movie.genres.join('&') : movie.genres.join(', '), [movie.genres]);
-  const release = useMemo(()=>movie.release_date.split('-')[0], [movie.release_date]);
-  const [showDetails,setShowDetails]=useState(false)
+  const genres = useMemo(() => movie.genres.length == 2 ? movie.genres.join('&') : movie.genres.join(', '), [movie.genres]);
+  const release = useMemo(() => movie.release_date.split('-')[0], [movie.release_date]);
+  const [showDetails, setShowDetails] = useToggle();
+  const showToggle = useCallback(() => setShowDetails(), [showDetails]);
   return (
-    <StyledMovieCard onClick={showDetails}>
-      <LongMenu movie={movie}/>
-      <StyledImg src={movie.poster_path}></StyledImg>
-      <StyledDescription>
-        <h3>{movie.title}</h3>
-        <p>{genres}</p>
-        <div>{release}</div>
-      </StyledDescription>
-      <MovieDetails className='movie-details' movie={movie}/>
+    <StyledMovieCard>
+      <LongMenu movie={movie} />
+      <span onClick={showToggle}>
+        <StyledImg src={movie.poster_path} />
+        <StyledDescription>
+          <h3>{movie.title}</h3>
+          <p>{genres}</p>
+          <div>{release}</div>
+        </StyledDescription>
+        <MovieDetails className='movie-details' movie={movie} showToggle={showToggle} show={showDetails} />
+      </span>
     </StyledMovieCard>
   );
 }

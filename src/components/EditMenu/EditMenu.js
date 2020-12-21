@@ -6,6 +6,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import {connect} from 'react-redux';
 import {openModalByType} from '../../redux/action/index';
 import {StyledEditMenu} from './StyledEditMenu';
+import PropTypes from 'prop-types';
 
 const ITEM_HEIGHT = 48;
 
@@ -49,12 +50,17 @@ function LongMenu({handleOpenModal, movie}) {
           },
         }}
       >
-        <MenuItem onClick={()=>handleOpen('edit', movie)}>Edit</MenuItem>
-        <MenuItem onClick={()=>handleOpen('delete')}>Delete</MenuItem>
+        <MenuItem onClick={() => handleOpen('edit', movie)}>Edit</MenuItem>
+        <MenuItem onClick={() => handleOpen('delete')}>Delete</MenuItem>
       </Menu>
     </StyledEditMenu>
   );
 }
+
+LongMenu.propTypes = {
+  handleOpenModal: PropTypes.func.isRequired,
+  movie: PropTypes.object.isRequired,
+};
 
 /**
  * @param dispatch

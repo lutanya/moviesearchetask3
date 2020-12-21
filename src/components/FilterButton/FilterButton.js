@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyledFilterButton} from './StyledFilterButton';
-import {connect} from 'react-redux';
-import {fetchByGenre} from '../../redux/action';
+import { StyledFilterButton } from './StyledFilterButton';
+import { connect } from 'react-redux';
+import { fetchByGenre } from '../../redux/action';
+import { useCallback } from 'react';
 
 /**
  * @param {string} genre search param
  * @param {Function} fetchByGenreProp search function
  * @return {Element} search burron on the search pane
  */
-function FilterButton({genre, fetchByGenreProp}) {
+function FilterButton({ genre, fetchByGenreProp }) {
+  const fetchMovie = useCallback(() => fetchByGenreProp(genre), [genre])
   return (
-    <StyledFilterButton onClick={() => fetchByGenreProp(genre)}>
+    <StyledFilterButton onClick={fetchMovie}>
       {genre}
     </StyledFilterButton>
   );

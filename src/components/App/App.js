@@ -4,8 +4,7 @@ import {SearchPane} from '../SearchPane/SearchPane';
 import {Footer} from '../Footer/Footer';
 import {ErrorBoundary} from '../Errorboundary/ErrorBoundary';
 import {StyledApp, StyledMain} from './StyledApp';
-//import MovieList from '../MovieList/MovieList';
-import ModalConductor from '../ModalManager/ModalManager';
+import ModalConductor from '../ModalConductor/ModalConductor';
 
 const MovieList = lazy(() => import('../MovieList/MovieList'));
 
@@ -17,7 +16,7 @@ export default class App extends Component {
   render() {
     return (
       <StyledApp>
-        <Header className='header'/>
+        <Header className='header' />
         <ErrorBoundary>
           <StyledMain>
             <SearchPane />
@@ -26,8 +25,8 @@ export default class App extends Component {
             </React.Suspense>
           </StyledMain>
         </ErrorBoundary>
-        <Footer className='footer'/>
-        <ModalConductor/>
+        <Footer className='footer' />
+        <ModalConductor />
       </StyledApp>
     );
   }

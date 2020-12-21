@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const StyledMovieCard = styled.a`
     margin: 5px;
     float: left;

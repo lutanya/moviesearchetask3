@@ -24,7 +24,7 @@ export function SearchPane() {
       </StyledUl>
       <StyledLabel>
         SORT BY
-        <BindDropDown values={values}/>
+        <BindDropDown values={values} />
       </StyledLabel>
     </>
   );

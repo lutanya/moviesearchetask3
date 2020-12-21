@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button } from '../Button/Button';
-import { StyledSubmitButton } from '../Button/StyledButton.js';
+import {Button} from '../Button/Button';
+import {StyledSubmitButton} from '../Button/StyledButton.js';
 
 /**
  * @param {event} event click on submit button event
  */
 function addMovie(event) {
-    console.log('undoInputs...');
+  console.log('undoInputs...');
 }
 
 /**
@@ -17,11 +17,11 @@ function addMovie(event) {
  */
 
 export default function DeleteMoviePopup() {
-    return (
-        <form>
-            Are you sure you want to delete this movie?
-            <Button label="CONFIRM" action={addMovie}
-                colored='true' position={StyledSubmitButton} />
-        </form>
-    );
+  return (
+    <form>
+      Are you sure you want to delete this movie?
+      <Button label="CONFIRM" action={addMovie}
+        colored position={StyledSubmitButton} />
+    </form>
+  );
 }

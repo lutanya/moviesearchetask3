@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button } from '../Button/Button';
-import { StyledResetButton, StyledSubmitButton } from '../Button/StyledButton.js';
+import {Button} from '../Button/Button';
+import {StyledResetButton, StyledSubmitButton} from '../Button/StyledButton.js';
 import Input from '../Input/Input';
+import PropTypes from 'prop-types';
 
 /**
  * @param {event} event click on reset button event
@@ -24,7 +25,7 @@ function addMovie(event) {
  * @param {string} title title of the modal window
  */
 
-export default function AddMoviePopup({ movie }) {
+export default function AddMoviePopup({movie}) {
   const [placeholder] = [
     ['Select Title',
       'Select Date',
@@ -37,16 +38,19 @@ export default function AddMoviePopup({ movie }) {
     <>
       <form>
         {Object.keys(movie).map((key, i) => (
-          <Input label={key} placeholder={placeholder[i]} />
+          <Input key={key} label={key} placeholder={placeholder[i]} />
         ),
         )}
         <Button label="RESET" action={resetInputs}
-          empty='true' position={StyledResetButton} />
+          empty position={StyledResetButton} />
         <Button label="SUBMIT" action={addMovie}
-          colored='true' position={StyledSubmitButton} />
+          colored position={StyledSubmitButton} />
       </form>
     </>
   );
 }
 
+AddMoviePopup.propTypes = {
+  movie: PropTypes.object.isRequired,
+};
 

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {fetchBySortParam} from '../../redux/action';
+import PropTypes from 'prop-types';
 
 function BindDropDown({values, fetchMovies}) {
   const [value, setValue] = useState('0');
@@ -22,6 +23,10 @@ function BindDropDown({values, fetchMovies}) {
   );
 }
 
+BindDropDown.propTypes = {
+  values: PropTypes.array.isRequired,
+  fetchMovies: PropTypes.func.isRequired,
+};
 
 /**
  * @param dispatch
