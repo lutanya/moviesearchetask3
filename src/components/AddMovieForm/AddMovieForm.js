@@ -25,15 +25,7 @@ function addMovie(event) {
  * @param {string} title title of the modal window
  */
 
-export default function AddMoviePopup({movie}) {
-  const [placeholder] = [
-    ['Select Title',
-      'Select Date',
-      'Movie URL here',
-      'Select genre',
-      'Overview here',
-      'Runtime here'],
-  ];
+export default function AddMovieForm({movie, placeholder}) {
   return (
     <>
       <form>
@@ -50,7 +42,7 @@ export default function AddMoviePopup({movie}) {
   );
 }
 
-AddMoviePopup.propTypes = {
+AddMovieForm.propTypes = {
   movie: PropTypes.object.isRequired,
 };
 

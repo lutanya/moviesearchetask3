@@ -1,23 +1,30 @@
-import React, {useState} from 'react';
-import {StyledInput} from './StyledInput';
+import React, { useState } from 'react';
+import { StyledInput } from './StyledInput';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {handleInputChange} from '../../redux/action';
+import { connect } from 'react-redux';
+import { handleInputChange } from '../../redux/action';
+import CheckboxInput from '../CheckboxInput/CheckboxInput';
 
 /**
  * @param {string} label label on input
  * @return {Element} inputs in the edit form
  */
-function Input({label, placeholder, movie, handleInputChange}) {
+function Input({ label, placeholder, movie, handleInputChange }) {
   const [value, setValue] = useState(movie[label]);
   const handleChange = (event) => {
     setValue(event.target.value);
     handleInputChange(event.target.value, label);
   };
+  
   return (
     <StyledInput>
-      <p>{label}</p>
-      <input type="text" value={value} onChange={handleChange} placeholder={placeholder} />
+      <p>{label}</p>      
+      {label == 'GENRE' ?        
+        <CheckboxInput/>
+        : 
+        <input type={label == 'RELEASE DATE' ? 'date' : 'text'}
+        value={value} onChange={handleChange} placeholder={placeholder} />
+      }
     </StyledInput>
   );
 }

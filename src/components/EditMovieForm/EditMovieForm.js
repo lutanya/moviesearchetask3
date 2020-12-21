@@ -24,15 +24,7 @@ function addMovie(event) {
  * @param {string} title title of the modal window
  */
 
-export default function EditMoviePopup({movie}) {
-  const [placeholder] = [
-    ['Select Title',
-      'Select Date',
-      'Movie URL here',
-      'Select genre',
-      'Overview here',
-      'Runtime here'],
-  ];
+export default function EditMovieForm({movie, placeholder}) {
   return (
     <form>
       {Object.keys(movie).map((key, i) => (

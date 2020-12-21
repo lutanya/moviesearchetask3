@@ -34,7 +34,15 @@ export default function modal(state = initialState, action) {
             ...state,
             movie: {
               ...state.movie,
-              TITLE: action.value,
+              'TITLE': action.value,
+            },
+          };
+          case 'RELEASE DATE':
+          return {
+            ...state,
+            movie: {
+              ...state.movie,
+              'RELEASE DATE': action.value,
             },
           };
       };

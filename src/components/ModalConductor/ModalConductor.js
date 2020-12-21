@@ -1,25 +1,28 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import './ModalConductor.css';
-import AddMoviePopup from '../AddMoviePopup/AddMoviePopup';
-import EditMoviePopup from '../EditMoviePopup/EditMoviePopup';
+import AddMovieForm from '../AddMovieForm/AddMovieForm';
+import EditMovieForm from '../EditMovieForm/EditMovieForm';
 import EditMenu from '../EditMenu/EditMenu';
-import {connect} from 'react-redux';
-import DeleteMoviePopup from '../DeleteMoviePopup/DeleteMoviePopup';
-import {Modal} from '../Modal/Modal';
-import {closeModal} from '../../redux/action';
+import { connect } from 'react-redux';
+import DeleteMovieForm from '../DeleteMovieForm/DeleteMovieForm';
+import { Modal } from '../Modal/Modal';
+import { closeModal } from '../../redux/action';
 import PropTypes from 'prop-types';
 
-const ModalConductor = ({currentModal, show, handleCloseModal, movie}) => {
-  const closeModal=()=>handleCloseModal();
+const ModalConductor = ({ currentModal, show, handleCloseModal, movie }) => {
+  const closeModal = () => handleCloseModal();
+  const placeholder = 
+    ['Select Title',
+      'Select Date',
+      'Movie URL here',
+      'Select genre',
+      'Overview here',
+      'Runtime here'];
   switch (currentModal) {
     case 'add':
       return (
-        <Modal show={show}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>x</span>
-            ADD MOVIE
-            <AddMoviePopup movie={movie} />
-          </div>
+        <Modal open={show} onClose={closeModal} title='ADD MOVIE'>
+          <AddMovieForm movie={movie} placeholder={placeholder}/>
         </Modal>
       );
     case 'menu':
@@ -27,21 +30,14 @@ const ModalConductor = ({currentModal, show, handleCloseModal, movie}) => {
 
     case 'edit':
       return (
-        <Modal show={show}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>x</span>
-            EDIT MOVIE
-            <EditMoviePopup movie={movie} />
-          </div>
+        <Modal open={show} onClose={closeModal} title='EDIT MOVIE'>
+          <EditMovieForm movie={movie} placeholder={placeholder}/>
         </Modal>
       );
     case 'delete':
       return (
-        <Modal show={show}>
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>x</span>
-        EDIT MOVIE<DeleteMoviePopup />
-          </div>
+        <Modal open={show} onClose={closeModal} title='DELETE MOVIE'>
+          <DeleteMovieForm />
         </Modal>
       );
     default:
