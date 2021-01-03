@@ -22,8 +22,8 @@ function LongMenu({handleOpenModal, movie}) {
     setAnchorEl(null);
   };
 
-  const handleOpen = (type, title, movie) => {
-    handleOpenModal(type, title, movie);
+  const handleOpen = (type, movie) => {
+    handleOpenModal(type, movie);
     setAnchorEl(null);
   };
 
@@ -51,7 +51,7 @@ function LongMenu({handleOpenModal, movie}) {
         }}
       >
         <MenuItem onClick={() => handleOpen('edit', movie)}>Edit</MenuItem>
-        <MenuItem onClick={() => handleOpen('delete')}>Delete</MenuItem>
+        <MenuItem onClick={() => handleOpen('delete', movie)}>Delete</MenuItem>
       </Menu>
     </StyledEditMenu>
   );

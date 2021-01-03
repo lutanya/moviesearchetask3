@@ -11,9 +11,10 @@ import {StyledButton} from './StyledButton';
  * @return {Element} button
  */
 export function Button({action, label, position, colored, empty}) {
+
   return (
     <StyledButton position={position} colored={colored}
-      onClick={action} empty={empty}>
+      onClick={(event)=>action(event)} empty={empty}>
       {label}
     </StyledButton>
   );

@@ -1,30 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { StyledInput } from './StyledInput';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { handleInputChange } from '../../redux/action';
-import CheckboxInput from '../CheckboxInput/CheckboxInput';
+import CheckboxSelector from '../CheckboxSelector/CheckboxSelector';
+
+
+import {
+  TITLE,
+  RELEASE_DATE,
+  MOVIE_URL,
+  GENRE,
+  OVERVIEW,
+  GENRE_UPPERCASE,
+  MOVIE_URL_UPPERCASE,
+  RUNTIME,
+  GENRES,
+  MOVIE_ID_UPPERCASE,
+} from '../../redux/reducers/constants';
 
 /**
  * @param {string} label label on input
  * @return {Element} inputs in the edit form
  */
-function Input({ label, placeholder, movie, handleInputChange }) {
-  const [value, setValue] = useState(movie[label]);
-  const handleChange = (event) => {
-    setValue(event.target.value);
-    handleInputChange(event.target.value, label);
-  };
-  
+function Input({ label, placeholder, value, error, handleInputChange }) {
+
+  const inputLabel = useMemo(() =>
+    label == 'poster_path' ?
+      MOVIE_URL_UPPERCASE :
+      label == 'genre' ?
+        GENRE_UPPERCASE :
+        label == 'id' ?
+          MOVIE_ID_UPPERCASE :
+          label.replace('_', ' ').toUpperCase(), [label]);
+
   return (
     <StyledInput>
-      <p>{label}</p>      
-      {label == 'GENRE' ?        
-        <CheckboxInput/>
-        : 
-        <input type={label == 'RELEASE DATE' ? 'date' : 'text'}
-        value={value} onChange={handleChange} placeholder={placeholder} />
+      {value || label!='id'?<label>{inputLabel}</label>: null}
+      {label == GENRES ?
+        <CheckboxSelector />
+        :
+        label == 'id' ?
+           <p>{value}</p> 
+          :
+          <input
+            type={label == RELEASE_DATE ? 'date' : label == RUNTIME ? 'number' : 'text'}
+            value={value}
+            onChange={(event) => handleInputChange(event.target.value, label)}
+            placeholder={placeholder}
+          />
       }
+      <span>{error}</span>
     </StyledInput>
   );
 }
@@ -33,10 +59,6 @@ Input.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  movie: state.modal.movie,
-});
 
 /**
  * @param dispatch
@@ -47,5 +69,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Input);
+export default connect(null, mapDispatchToProps)(Input);
 

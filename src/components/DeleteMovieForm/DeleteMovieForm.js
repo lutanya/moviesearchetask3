@@ -1,6 +1,5 @@
 import React from 'react';
-import {Button} from '../Button/Button';
-import {StyledSubmitButton} from '../Button/StyledButton.js';
+import { StyledSubmitButton, StyledButton } from '../Button/StyledButton.js';
 
 /**
  * @param {event} event click on submit button event
@@ -16,12 +15,18 @@ function addMovie(event) {
  * @param {string} title title of the modal window
  */
 
-export default function DeleteMoviePopup() {
+export default function DeleteMovieForm({ movie, handleDeleteMovie }) {
   return (
     <form>
       Are you sure you want to delete this movie?
-      <Button label="CONFIRM" action={addMovie}
-        colored position={StyledSubmitButton} />
+      <StyledButton
+        label="CONFIRM"
+        onClick={(event) => handleDeleteMovie(event, movie)}
+        colored
+        position={StyledSubmitButton}
+      >
+        CONFIRM
+      </StyledButton>
     </form>
   );
 }

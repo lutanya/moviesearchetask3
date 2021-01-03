@@ -16,7 +16,7 @@ import {useToggle} from '../useToggle/useToggle.js';
 export function MovieCard({movie}) {
   const genres = useMemo(() => movie.genres.length == 2 ? movie.genres.join('&') : movie.genres.join(', '), [movie.genres]);
   const release = useMemo(() => movie.release_date.split('-')[0], [movie.release_date]);
-  const [showDetails, setShowDetails] = useToggle();
+  const [showDetails, setShowDetails] = useToggle(false);
   const showToggle = useCallback(() => setShowDetails(), [showDetails]);
   return (
     <StyledMovieCard>

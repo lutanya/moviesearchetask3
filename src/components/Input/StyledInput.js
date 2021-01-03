@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 
 export const StyledInput = styled.div`
+    margin-bottom: 30px;
     > input {
         width: 480px;
         padding: 16px 20px;
@@ -9,12 +10,17 @@ export const StyledInput = styled.div`
         border:none;
         border-radius: 4px; 
         background-color #424242;
-        color: #FFFFFF;
-
+        color: #FFFFFF;   
+        margin-top: 10px;     
     }
-    >p{
+
+    >label {
         color: #F65261;
         font-size: 16px;
-        margin-bottom: 8px;
+    }
+
+    >span {
+        font-size: 16px;
+        color: #F65261;
     }
 `;

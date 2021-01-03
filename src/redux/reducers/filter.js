@@ -34,7 +34,7 @@ export default function filter(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        error: action.payload.error,
+        error: action.error,
       };
     default: return state;
   }
