@@ -1,11 +1,11 @@
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const StyledHeader = styled.header`
     background-color: #232323;
     height: 400px;
     padding: 2% 5%;
     font-size: 130%;
-     p {
+    p {
         font-size: 2em;
         padding: 1% 5%; 
         position:  absolute;
@@ -17,13 +17,13 @@ export const StyledHeader = styled.header`
 export const SearchArea = styled.div`
     position:  absolute;
     padding: 11% 5%; 
-> input {
+    > input {
         width: 700px;
         padding: 0.8em 1em;
         font-size: inherit;
         border:none;
         border-radius: 4px; 
-        background-color #555555;
+        background-color: #555555;
         color: #FFFFFF;
         margin-right: 20px 
 }

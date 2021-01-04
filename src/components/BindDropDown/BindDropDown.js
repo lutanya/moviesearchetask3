@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {connect} from 'react-redux';
 import {fetchBySortParam} from '../../redux/action';
 import PropTypes from 'prop-types';
@@ -12,9 +12,9 @@ function BindDropDown({values, fetchMovies}) {
     fetchMovies(values[parseInt(currentVal)].name);
   }
 
-  const optionTemplate = values.map((v) => (
+  const optionTemplate = useMemo(() => values.map((v) => (
     <option key={v.id} value={v.id}>{v.name}</option>
-  ));
+  )), [values]);
 
   return (
     <select value={value} onChange={handleChange}>

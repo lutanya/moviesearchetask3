@@ -1,22 +1,25 @@
 import React from 'react';
-import { Logo } from '../Logo/Logo';
-import { Button } from '../Button/Button';
-import { StyledHeader, SearchArea, StyledAddButton } from './StyledHeader.js';
-import { connect } from 'react-redux';
-import { openModalByType } from '../../redux/action';
+import {Logo} from '../Logo/Logo';
+import {StyledButton} from '../Button/StyledButton';
+import {StyledHeader, SearchArea, StyledAddButton} from './StyledHeader.js';
+import {connect} from 'react-redux';
+import {openModalByType} from '../../redux/action';
 import './header.css';
 import PropTypes from 'prop-types';
 
-const Header = ({ className, handleOpenModal }) => {
-  const openModal = () => handleOpenModal('add');
+const Header = ({className, handleOpenModal}) => {
   return (
     <StyledHeader className={className}>
       <Logo />
-      <Button label="+ADD MOVIE" position={StyledAddButton} action={openModal} />
+      <StyledButton position={StyledAddButton} onClick={() => handleOpenModal('add')} >
+        +ADD MOVIE
+      </StyledButton>
       <p>FIND YOUR MOVIE</p>
       <SearchArea>
         <input placeholder='What do you want to watch?' />
-        <Button label="SEARCH" action={searchMovie} colored />
+        <StyledButton onClick={() => searchMovie()} colored >
+          SEARCH
+        </StyledButton>
       </SearchArea>
     </StyledHeader>
   );
@@ -42,4 +45,5 @@ export default connect(null, mapDispatchToProps)(Header);
 
 Header.propTypes = {
   className: PropTypes.string,
+  handleOpenModal: PropTypes.func.isRequired,
 };

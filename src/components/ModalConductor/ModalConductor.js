@@ -1,31 +1,32 @@
 import React from 'react';
 import './ModalConductor.css';
 import EditMenu from '../EditMenu/EditMenu';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import DeleteMovieForm from '../DeleteMovieForm/DeleteMovieForm';
-import { Modal } from '../Modal/Modal';
-import { closeModal, handleAddMovie, handleFormReset, handleEditMovie, handleDeleteMovie } from '../../redux/action';
+import {Modal} from '../Modal/Modal';
+import {
+  closeModal,
+  handleAddMovie,
+  handleFormReset,
+  handleEditMovie,
+  handleDeleteMovie,
+}
+  from '../../redux/action';
 import PropTypes from 'prop-types';
 
-import {
-  TITLE,
-  RELEASE_DATE,
-  MOVIE_URL,
-  GENRES,
-  OVERVIEW,
-  RUNTIME,
-} from '../../redux/reducers/constants';
+import {GENRES} from '../../redux/reducers/constants';
 import MovieForm from '../MovieForm/MovieForm';
 
 const placeholder =
-  ['id',
+  [
+    'id',
     'Select Title',
     'Select Date',
     'Movie URL here',
     'Select genre',
     'Overview here',
-    'Runtime here'];
-
+    'Runtime here',
+  ];
 
 export function isFormValid(movie, handleFormErrors) {
   const errors = [];
@@ -33,22 +34,25 @@ export function isFormValid(movie, handleFormErrors) {
 
   if (movie[GENRES] == null || movie[GENRES].length == 0) {
     formIsValid = false;
-    errors[GENRES] = "Select at least one genre to proceed";
+    errors[GENRES] = 'Select at least one genre to proceed';
     handleFormErrors(errors);
   }
 
   return formIsValid;
 }
 
-const ModalConductor = ({ currentModal,
-  show,
-  movie,
-  handleCloseModal,
-  handleFormReset,
-  handleAddMovie,
-  handleEditMovie,
-  handleDeleteMovie }) => {
-
+const ModalConductor = (
+    {
+      currentModal,
+      show,
+      movie,
+      handleCloseModal,
+      handleFormReset,
+      handleAddMovie,
+      handleEditMovie,
+      handleDeleteMovie,
+    },
+) => {
   function handleAddMovieSubmit(event, movie, handleFormErrors) {
     event.preventDefault();
 
@@ -79,7 +83,6 @@ const ModalConductor = ({ currentModal,
       );
     case 'menu':
       return <EditMenu />;
-
     case 'edit':
       return (
         <Modal open={show} onClose={handleCloseModal} title='EDIT MOVIE'>
@@ -104,7 +107,6 @@ const ModalConductor = ({ currentModal,
           <center>The movie has been added to <br />database successfully</center>
         </Modal>
       );
-
     default:
       return null;
   }
@@ -114,6 +116,10 @@ ModalConductor.propTypes = {
   currentModal: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   handleCloseModal: PropTypes.func.isRequired,
+  handleFormReset: PropTypes.func.isRequired,
+  handleAddMovie: PropTypes.func.isRequired,
+  handleEditMovie: PropTypes.func.isRequired,
+  handleDeleteMovie: PropTypes.func.isRequired,
   movie: PropTypes.object.isRequired,
 };
 
@@ -129,16 +135,17 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     handleCloseModal: () => dispatch(closeModal()),
-    handleFormReset: (event) => { event.preventDefault(); dispatch(handleFormReset()) },
+    handleFormReset: (event) => {
+      event.preventDefault(); dispatch(handleFormReset());
+    },
     handleAddMovie: (movie) => dispatch(handleAddMovie(movie)),
     handleEditMovie: (movie) => dispatch(handleEditMovie(movie)),
-    handleDeleteMovie: (event, movie) => { event.preventDefault(); dispatch(handleDeleteMovie(movie)) },
+    handleDeleteMovie: (event, movie) => {
+      event.preventDefault(); dispatch(handleDeleteMovie(movie));
+    },
   };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalConductor);
-
-
-
 
 

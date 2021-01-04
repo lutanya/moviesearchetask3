@@ -1,17 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '../Button/Button';
-import { StyledButton, StyledResetButton, StyledSubmitButton } from '../Button/StyledButton.js';
+import React from 'react';
+import {StyledButton, StyledResetButton, StyledSubmitButton} from '../Button/StyledButton.js';
 import Input from '../Input/Input';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { handleFormErrors } from '../../redux/action';
+import {connect} from 'react-redux';
+import {handleFormErrors} from '../../redux/action';
 
 
 export function formInputs(movie, placeholder, errors) {
   return Object.entries(movie).map((entity, i) => (
-    <Input key={entity[0]} value={entity[1]} label={entity[0]} placeholder={placeholder[i]} error={errors[entity[0]]}  />
+    <Input
+      key={entity[0]}
+      value={entity[1]}
+      label={entity[0]}
+      placeholder={placeholder[i]}
+      error={errors[entity[0]]}
+    />
   ),
-  )
+  );
 }
 
 /**
@@ -21,23 +26,32 @@ export function formInputs(movie, placeholder, errors) {
  * @param {string} title title of the modal window
  */
 
-function AddMovieForm({ movie, placeholder, errors, submitLable, handleFormReset, handleFormSubmit, handleFormErrors }) {
-
+function AddMovieForm(
+    {
+      movie,
+      placeholder,
+      errors,
+      submitLable,
+      handleFormReset,
+      handleFormSubmit,
+      handleFormErrors,
+    },
+) {
   return (
     <>
-      <form>        
+      <form>
         {formInputs(movie, placeholder, errors)}
-        <StyledButton 
-          onClick={(event)=>handleFormReset(event)} 
-          empty 
-          position={StyledResetButton} 
+        <StyledButton
+          onClick={(event) => handleFormReset(event)}
+          empty
+          position={StyledResetButton}
         >
           RESET
         </StyledButton>
-        <StyledButton 
-          onClick={(event) => handleFormSubmit(event, movie, handleFormErrors)} 
-          colored 
-          position={StyledSubmitButton} 
+        <StyledButton
+          onClick={(event) => handleFormSubmit(event, movie, handleFormErrors)}
+          colored
+          position={StyledSubmitButton}
         >
           {submitLable}
         </StyledButton>
@@ -48,6 +62,12 @@ function AddMovieForm({ movie, placeholder, errors, submitLable, handleFormReset
 
 AddMovieForm.propTypes = {
   movie: PropTypes.object.isRequired,
+  placeholder: PropTypes.array,
+  errors: PropTypes.array,
+  submitLable: PropTypes.string.isRequired,
+  handleFormReset: PropTypes.func.isRequired,
+  handleFormSubmit: PropTypes.func.isRequired,
+  handleFormErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -9,7 +9,6 @@ import {
 import {
   TITLE,
   RELEASE_DATE,
-  MOVIE_URL,
   OVERVIEW,
   RUNTIME,
   POSTER_PATH,
@@ -28,13 +27,13 @@ const initialState = {
     runtime: '',
   },
   values: [
-    { id: 1, value: "Animation", isChecked: false },
-    { id: 2, value: "Adventure", isChecked: false },
-    { id: 3, value: "Family", isChecked: false },
-    { id: 4, value: "Comedy", isChecked: false },
-    { id: 5, value: "Romance", isChecked: false },
-    { id: 6, value: "Drama", isChecked: false },
-    { id: 7, value: "Fantasy", isChecked: false }
+    {id: 1, value: 'Animation', isChecked: false},
+    {id: 2, value: 'Adventure', isChecked: false},
+    {id: 3, value: 'Family', isChecked: false},
+    {id: 4, value: 'Comedy', isChecked: false},
+    {id: 5, value: 'Romance', isChecked: false},
+    {id: 6, value: 'Drama', isChecked: false},
+    {id: 7, value: 'Fantasy', isChecked: false},
   ],
   errors: [],
 };
@@ -44,7 +43,7 @@ export default function modal(state = initialState, action) {
     case OPEN_MODAL_BY_TYPE:
       const movie = action.movie == null ? state.movie : action.movie;
       const values = action.genres == null ? state.values :
-        state.values.map((v) => ({ ...v, isChecked: action.genres.includes(v.value) }));
+        state.values.map((v) => ({...v, isChecked: action.genres.includes(v.value)}));
       return {
         ...state,
         show: true,
@@ -103,7 +102,7 @@ export default function modal(state = initialState, action) {
           };
       };
     case RESET_VALUES:
-      const next = state.values.map((v) => ({ ...v, isChecked: false }));
+      const next = state.values.map((v) => ({...v, isChecked: false}));
       return {
         ...state,
         movie: {
@@ -118,18 +117,19 @@ export default function modal(state = initialState, action) {
         values: next,
       };
     case CHANGE_CHECKBOX_VALUES:
-      const toggleValue = state.values.find(v=>v.id == action.id);
-      const nextGenre = toggleValue.isChecked?
-      state.movie.genres.filter(genre=>toggleValue.value!=genre):
-      [...state.movie.genres, toggleValue.value];
+      const toggleValue = state.values.find((v) => v.id == action.id);
+      const nextGenre = toggleValue.isChecked ?
+        state.movie.genres.filter((genre) => toggleValue.value != genre) :
+        [...state.movie.genres, toggleValue.value];
       return {
         ...state,
-        values: state.values.map((v) => ({ ...v, isChecked: v.id == action.id ? !v.isChecked : v.isChecked })),
+        values: state.values.map((v) =>
+          ({...v, isChecked: v.id == action.id ? !v.isChecked : v.isChecked})),
         movie: {
           ...state.movie,
           genres: nextGenre,
         },
-        errors: [{ ...state.errors, genres: '', }]
+        errors: [{...state.errors, genres: ''}],
       };
     case 'HANDLE_ERRORS':
       return {

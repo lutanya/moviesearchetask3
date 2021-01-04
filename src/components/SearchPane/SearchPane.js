@@ -4,15 +4,16 @@ import FilterButton from '../FilterButton/FilterButton';
 import {StyledUl} from './StyledUl';
 import {StyledLabel} from './StyledLabel';
 
+const values = [
+  {name: 'RELEASE DATE', id: 0},
+  {name: 'TITLE', id: 1},
+  {name: 'VOTE AVERAGE', id: 2},
+];
+
 /**
  * @return {Element} search movies by genre pane
  */
 export function SearchPane() {
-  const values = [
-    {name: 'RELEASE DATE', id: 0},
-    {name: 'TITLE', id: 1},
-    {name: 'VOTE AVERAGE', id: 2},
-  ];
   return (
     <>
       <StyledUl>

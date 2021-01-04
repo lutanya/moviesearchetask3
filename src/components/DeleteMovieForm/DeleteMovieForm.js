@@ -1,12 +1,6 @@
 import React from 'react';
-import { StyledSubmitButton, StyledButton } from '../Button/StyledButton.js';
-
-/**
- * @param {event} event click on submit button event
- */
-function addMovie(event) {
-  console.log('undoInputs...');
-}
+import {StyledSubmitButton, StyledButton} from '../Button/StyledButton.js';
+import PropTypes from 'prop-types';
 
 /**
  * @return {Element} returns button with modal window
@@ -15,7 +9,7 @@ function addMovie(event) {
  * @param {string} title title of the modal window
  */
 
-export default function DeleteMovieForm({ movie, handleDeleteMovie }) {
+export default function DeleteMovieForm({movie, handleDeleteMovie}) {
   return (
     <form>
       Are you sure you want to delete this movie?
@@ -30,3 +24,8 @@ export default function DeleteMovieForm({ movie, handleDeleteMovie }) {
     </form>
   );
 }
+
+DeleteMovieForm.propTypes = {
+  movie: PropTypes.object.isRequired,
+  handleDeleteMovie: PropTypes.func.isRequired,
+};

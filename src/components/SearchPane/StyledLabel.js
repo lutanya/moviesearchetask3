@@ -4,7 +4,7 @@ export const StyledLabel = styled.label`
     position: absolute;
     right: 60px; top: 0px;
 
-    >select{
+    >select {
         color:#FFFFFF;
         background:#232323;
         margin: 16px;

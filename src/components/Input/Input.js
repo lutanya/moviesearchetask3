@@ -1,17 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { StyledInput } from './StyledInput';
+import React, {useMemo} from 'react';
+import {StyledInput} from './StyledInput';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { handleInputChange } from '../../redux/action';
+import {connect} from 'react-redux';
+import {handleInputChange} from '../../redux/action';
 import CheckboxSelector from '../CheckboxSelector/CheckboxSelector';
 
-
 import {
-  TITLE,
   RELEASE_DATE,
-  MOVIE_URL,
-  GENRE,
-  OVERVIEW,
   GENRE_UPPERCASE,
   MOVIE_URL_UPPERCASE,
   RUNTIME,
@@ -23,8 +18,7 @@ import {
  * @param {string} label label on input
  * @return {Element} inputs in the edit form
  */
-function Input({ label, placeholder, value, error, handleInputChange }) {
-
+function Input({label, placeholder, value, error, handleInputChange}) {
   const inputLabel = useMemo(() =>
     label == 'poster_path' ?
       MOVIE_URL_UPPERCASE :
@@ -38,11 +32,9 @@ function Input({ label, placeholder, value, error, handleInputChange }) {
     <StyledInput>
       {value || label!='id'?<label>{inputLabel}</label>: null}
       {label == GENRES ?
-        <CheckboxSelector />
-        :
+        <CheckboxSelector /> :
         label == 'id' ?
-           <p>{value}</p> 
-          :
+           <p>{value}</p> :
           <input
             type={label == RELEASE_DATE ? 'date' : label == RUNTIME ? 'number' : 'text'}
             value={value}
@@ -58,6 +50,9 @@ function Input({ label, placeholder, value, error, handleInputChange }) {
 Input.propTypes = {
   label: PropTypes.string.isRequired,
   placeholder: PropTypes.string.isRequired,
+  value: PropTypes.object,
+  error: PropTypes.string,
+  handleInputChange: PropTypes.func.isRequired,
 };
 
 /**

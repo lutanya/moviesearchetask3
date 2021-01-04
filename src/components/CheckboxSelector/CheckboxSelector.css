@@ -6,7 +6,7 @@
     border-radius: 4px;
     background-color: #424242;    
     font-size: 16px; 
-    margin-top: 10px;    
+    margin-top: 10px;  
 }
   
 .selectBox select {
@@ -15,6 +15,10 @@
     border: none;
     color: #686c71;
     font-size: inherit;
+}
+
+.checkboxes-invisible {
+    display: none;
 }
   
 .overSelect {
@@ -25,8 +29,7 @@
     bottom: 0;
 }
   
-#checkboxes {
-    display: none;
+.checkboxes {   
     border: none;
     font-size: 16px;
 }

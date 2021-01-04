@@ -1,6 +1,5 @@
 import React, {useMemo} from 'react';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import {fetchByGenre} from '../../redux/action';
 import {getMovies, getMoviesError, getMoviesLoading} from '../../redux/reducers/filter';
 import {MovieCard} from '../MovieCard/MovieCard';
@@ -40,9 +39,15 @@ const mapStateToProps = (state) => ({
   loading: getMoviesLoading(state),
 });
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({
-  fetchMovies: fetchByGenre,
-}, dispatch);
+
+/**
+ * @param dispatch
+ */
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchMovies: ()=>dispatch(fetchByGenre()),
+  };
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieList);
 
