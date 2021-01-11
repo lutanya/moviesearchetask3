@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 
 export const StyledInput = styled.div`
-    margin-bottom: 30px;
+margin-bottom: 30px; 
     > input {
         width: 480px;
         padding: 16px 20px;
@@ -11,7 +11,8 @@ export const StyledInput = styled.div`
         border-radius: 4px; 
         background-color: #424242;
         color: #FFFFFF;   
-        margin-top: 10px;     
+        margin-top: 10px; 
+         
     }
 
     >label {

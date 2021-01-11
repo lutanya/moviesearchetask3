@@ -15,18 +15,8 @@ import {
 import PropTypes from 'prop-types';
 
 import {GENRES} from '../../redux/reducers/constants';
-import MovieForm from '../MovieForm/MovieForm';
+import FormikForm from '../FormikForm/FormikForm';
 
-const placeholder =
-  [
-    'id',
-    'Select Title',
-    'Select Date',
-    'Movie URL here',
-    'Select genre',
-    'Overview here',
-    'Runtime here',
-  ];
 
 export function isFormValid(movie, handleFormErrors) {
   const errors = [];
@@ -47,37 +37,18 @@ const ModalConductor = (
       show,
       movie,
       handleCloseModal,
-      handleFormReset,
       handleAddMovie,
       handleEditMovie,
       handleDeleteMovie,
     },
 ) => {
-  function handleAddMovieSubmit(event, movie, handleFormErrors) {
-    event.preventDefault();
-
-    if (isFormValid(movie, handleFormErrors)) {
-      handleAddMovie(movie);
-    }
-  }
-
-  function handleEditMovieSubmit(event, movie, handleFormErrors) {
-    event.preventDefault();
-
-    if (isFormValid(movie, handleFormErrors)) {
-      handleEditMovie(movie);
-    }
-  }
   switch (currentModal) {
     case 'add':
       return (
         <Modal open={show} onClose={handleCloseModal} title='ADD MOVIE'>
-          <MovieForm
-            movie={movie}
-            placeholder={placeholder}
-            handleFormReset={handleFormReset}
+          <FormikForm
             submitLable='SUBMIT'
-            handleFormSubmit={handleAddMovieSubmit}
+            handleFormSubmit={handleAddMovie}
           />
         </Modal>
       );
@@ -86,12 +57,10 @@ const ModalConductor = (
     case 'edit':
       return (
         <Modal open={show} onClose={handleCloseModal} title='EDIT MOVIE'>
-          <MovieForm
+          <FormikForm
             movie={movie}
-            placeholder={placeholder}
-            handleFormReset={handleFormReset}
             submitLable='SAVE'
-            handleFormSubmit={handleEditMovieSubmit}
+            handleFormSubmit={handleEditMovie}
           />
         </Modal>
       );
@@ -116,7 +85,6 @@ ModalConductor.propTypes = {
   currentModal: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   handleCloseModal: PropTypes.func.isRequired,
-  handleFormReset: PropTypes.func.isRequired,
   handleAddMovie: PropTypes.func.isRequired,
   handleEditMovie: PropTypes.func.isRequired,
   handleDeleteMovie: PropTypes.func.isRequired,
@@ -135,9 +103,6 @@ const mapStateToProps = (state) => ({
 function mapDispatchToProps(dispatch) {
   return {
     handleCloseModal: () => dispatch(closeModal()),
-    handleFormReset: (event) => {
-      event.preventDefault(); dispatch(handleFormReset());
-    },
     handleAddMovie: (movie) => dispatch(handleAddMovie(movie)),
     handleEditMovie: (movie) => dispatch(handleEditMovie(movie)),
     handleDeleteMovie: (event, movie) => {
