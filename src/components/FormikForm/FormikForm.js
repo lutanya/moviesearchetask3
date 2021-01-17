@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyledButton, StyledResetButton, StyledSubmitButton} from '../Button/StyledButton.js';
 import {Formik, Form, Field, ErrorMessage, useField} from 'formik';
-import {MovieSchema} from '../../MovieShema/MovieShema.js';
+import {MovieSchema} from '../MovieShema/MovieShema.js';
 import {StyledInput} from '../Input/StyledInput.js';
 import CheckboxFormik from '../CheckboxFormik/CheckboxFormik.js';
 import PropTypes from 'prop-types';

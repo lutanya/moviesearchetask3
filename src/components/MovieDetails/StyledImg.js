@@ -4,7 +4,6 @@ import styled, {css} from 'styled-components';
 export const StyledImg = styled.div`
     ${(props) =>
     css`
-        float: left;
         width: 200px;
         height: 300px;
         margin-right: 20px;

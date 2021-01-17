@@ -13,6 +13,7 @@ module.exports = {
         filename: "js/[name].bundle-[hash].js",
         chunkFilename: "js/[name].bundle-[hash].js",
         path: path.resolve(__dirname, '..', "public"),
+        publicPath: '/',
     },
 
     resolve: {

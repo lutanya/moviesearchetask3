@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const StyledMovieCard = styled.a`
+export const StyledMovieCard = styled.div`
     margin: 5px;
     float: left;
     width: 325px;
     height: 606px;
-    margin-right: 50px;      
+    margin-right: 50px;   
+   
 `;
 
 export const StyledDescription = styled.div`

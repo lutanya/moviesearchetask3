@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {StyledImg} from './StyledImg.js';
 import {MovieDetails} from '../MovieDetails/MovieDetails.js';
 import {useToggle} from '../useToggle/useToggle.js';
+import { Link, NavLink } from 'react-router-dom';
 
 /**
  * @param {string} src Image url
@@ -24,6 +25,7 @@ export function MovieCard({movie}) {
   const showToggle = useCallback(() => setShowDetails(), [showDetails]);
   return (
     <StyledMovieCard>
+      <Link to={`/film/${movie.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
       <LongMenu movie={movie} />
       <span onClick={showToggle}>
         <StyledImg src={movie.poster_path} />
@@ -31,14 +33,9 @@ export function MovieCard({movie}) {
           <h3>{movie.title}</h3>
           <p>{genres}</p>
           <div>{release}</div>
-        </StyledDescription>
-        <MovieDetails
-          className='movie-details'
-          movie={movie}
-          showToggle={showToggle}
-          show={showDetails}
-        />
+        </StyledDescription>        
       </span>
+      </Link>
     </StyledMovieCard>
   );
 }

@@ -11,6 +11,7 @@ module.exports = {
     port: 9000,
     watchContentBase: true,
     progress: true,
-    open: true
+    open: true,    
+    historyApiFallback: true,
   }
 };

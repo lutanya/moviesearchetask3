@@ -1,5 +1,5 @@
-import React, {lazy, Component} from 'react';
-import Header from '../Header/Header';
+import React, {lazy} from 'react';
+import {Header} from '../Header/Header';
 import {SearchPane} from '../SearchPane/SearchPane';
 import {Footer} from '../Footer/Footer';
 import {ErrorBoundary} from '../Errorboundary/ErrorBoundary';
@@ -12,11 +12,10 @@ const MovieList = lazy(() => import('../MovieList/MovieList'));
  * @return {Element} App render
  * @param {Array} movies Array of fetching movies
  */
-export default class App extends Component {
-  render() {
+export default function App({component}) {
     return (
       <StyledApp>
-        <Header className='header' />
+        <Header className='header' component={component}/>
         <ErrorBoundary>
           <StyledMain>
             <SearchPane />
@@ -30,6 +29,5 @@ export default class App extends Component {
       </StyledApp>
     );
   }
-}
 
 

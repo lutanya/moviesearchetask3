@@ -18,10 +18,10 @@ export const StyledButton = styled('button')`
     ${(props) => props.position}
     ${(props) => props.empty &&
     css`
-        background: #424242;
+        background: #232323;
         border: solid 2px #F65261;
         color: #F65261;  
-        padding: 0.8em 0;
+        padding: 0.8em 1em;
     `}
 `;
 
