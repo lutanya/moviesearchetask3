@@ -1,29 +1,26 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getMovies, getMoviesError, getMoviesLoading } from '../../redux/reducers/filter';
 import { MovieCard } from '../MovieCard/MovieCard';
 import PropTypes from 'prop-types';
 import NoMovieFound from '../NoMovieFound/NoMovieFound';
 import { useLocation, useRouteMatch } from 'react-router';
 import { searchMovie } from '../../redux/action';
+import { TITLE } from '../../redux/reducers/constants';
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-/**
- * @return {Element} galery of the movies
- * @param {Array} movies a list with the movies
- */
-function MovieList({movies, handleSearchMovie, loading}) {
- 
-  const {url} = useRouteMatch();
+function MovieList({ movies, handleSearchMovie, loading }) {
+  const { url } = useRouteMatch();
 
-  let query = useQuery();
-  const title = query.get("title");
+  const query = useQuery();
+  const title = query.get(TITLE);
 
-  if(url==='/search'){
-    useEffect(() => { handleSearchMovie(title) }, [title]);
+  if (url === '/search') {
+    useEffect(() => {
+      handleSearchMovie(title);
+    }, [title]);
   }
 
   if (loading) {
@@ -33,16 +30,15 @@ function MovieList({movies, handleSearchMovie, loading}) {
   return (
     <>{
       movies.length > 0
-      ?
-      <>
-        <p>{movies.length} movies found</p>
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
-        ),
-        )}
-      </>
-      :
-      <NoMovieFound />
+        ?
+        <>
+          <p>{movies.length} movies found</p>
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} movie={movie} />
+          ),
+          )}
+        </>
+        : <NoMovieFound />
     }
     </>
   );
@@ -50,13 +46,14 @@ function MovieList({movies, handleSearchMovie, loading}) {
 
 MovieList.propTypes = {
   movies: PropTypes.array.isRequired,
+  handleSearchMovie: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 
 const mapStateToProps = (state) => ({
-  error: getMoviesError(state),
-  movies: getMovies(state),
-  loading: getMoviesLoading(state),
+  movies: state.filter.movies,
+  loading: state.filter.loading,
 });
 
 
@@ -65,7 +62,7 @@ const mapStateToProps = (state) => ({
  */
 function mapDispatchToProps(dispatch) {
   return {
-    handleSearchMovie: input => dispatch(searchMovie(input)),
+    handleSearchMovie: (input) => dispatch(searchMovie(input)),
   };
 }
 

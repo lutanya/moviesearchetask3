@@ -40,6 +40,3 @@ export default function filter(state = initialState, action) {
   }
 };
 
-export const getMovies = (state) => state.filter.movies;
-export const getMoviesLoading = (state) => state.filter.loading;
-export const getMoviesError = (state) => state.filter.error;

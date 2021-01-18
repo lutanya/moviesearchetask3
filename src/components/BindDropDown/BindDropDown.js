@@ -2,15 +2,15 @@ import React, {useMemo, useState} from 'react';
 import {connect} from 'react-redux';
 import {fetchBySortParam} from '../../redux/action';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router';
+import {useHistory} from 'react-router';
 
 function BindDropDown({values, fetchMovies}) {
   const [value, setValue] = useState('0');
-  let history = useHistory();
+  const history = useHistory();
   function handleChange(event) {
     const currentVal = event.target.value;
     setValue(currentVal);
-    history.push("/");
+    history.push('/');
     fetchMovies(values[parseInt(currentVal)].name);
   }
 

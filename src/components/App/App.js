@@ -8,26 +8,22 @@ import ModalConductor from '../ModalConductor/ModalConductor';
 
 const MovieList = lazy(() => import('../MovieList/MovieList'));
 
-/**
- * @return {Element} App render
- * @param {Array} movies Array of fetching movies
- */
 export default function App({component}) {
-    return (
-      <StyledApp>
-        <Header className='header' component={component}/>
-        <ErrorBoundary>
-          <StyledMain>
-            <SearchPane />
-            <React.Suspense fallback={<h3>Loading...Please wait</h3>}>
-              <MovieList />
-            </React.Suspense>
-          </StyledMain>
-        </ErrorBoundary>
-        <Footer className='footer' />
-        <ModalConductor />
-      </StyledApp>
-    );
-  }
+  return (
+    <StyledApp>
+      <Header className='header' component={component}/>
+      <ErrorBoundary>
+        <StyledMain>
+          <SearchPane />
+          <React.Suspense fallback={<h3>Loading...Please wait</h3>}>
+            <MovieList />
+          </React.Suspense>
+        </StyledMain>
+      </ErrorBoundary>
+      <Footer className='footer' />
+      <ModalConductor />
+    </StyledApp>
+  );
+}
 
 

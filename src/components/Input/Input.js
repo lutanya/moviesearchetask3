@@ -30,11 +30,11 @@ function Input({label, placeholder, value, error, handleInputChange}) {
 
   return (
     <StyledInput>
-      {value || label!='id'?<label>{inputLabel}</label>: null}
+      {value || label != 'id' ? <label>{inputLabel}</label> : null}
       {label == GENRES ?
         <CheckboxSelector /> :
         label == 'id' ?
-           <p>{value}</p> :
+          <p>{value}</p> :
           <input
             type={label == RELEASE_DATE ? 'date' : label == RUNTIME ? 'number' : 'text'}
             value={value}

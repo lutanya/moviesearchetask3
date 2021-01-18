@@ -7,11 +7,17 @@ import {Modal} from '../Modal/Modal';
 import {
   closeModal,
   handleAddMovie,
-  handleFormReset,
   handleEditMovie,
   handleDeleteMovie,
-}
-  from '../../redux/action';
+} from '../../redux/action';
+import {
+  ADD,
+  SUBMIT,
+  MENU,
+  EDIT,
+  SAVE, DELETE,
+  ADD_SUCCESS_MODUL,
+} from '../../util/constants';
 import PropTypes from 'prop-types';
 
 import {GENRES} from '../../redux/reducers/constants';
@@ -43,34 +49,34 @@ const ModalConductor = (
     },
 ) => {
   switch (currentModal) {
-    case 'add':
+    case ADD:
       return (
         <Modal open={show} onClose={handleCloseModal} title='ADD MOVIE'>
           <FormikForm
-            submitLable='SUBMIT'
+            submitLable={SUBMIT}
             handleFormSubmit={handleAddMovie}
           />
         </Modal>
       );
-    case 'menu':
+    case MENU:
       return <EditMenu />;
-    case 'edit':
+    case EDIT:
       return (
         <Modal open={show} onClose={handleCloseModal} title='EDIT MOVIE'>
           <FormikForm
             movie={movie}
-            submitLable='SAVE'
+            submitLable={SAVE}
             handleFormSubmit={handleEditMovie}
           />
         </Modal>
       );
-    case 'delete':
+    case DELETE:
       return (
         <Modal open={show} onClose={handleCloseModal} title='DELETE MOVIE'>
           <DeleteMovieForm movie={movie} handleDeleteMovie={handleDeleteMovie} />
         </Modal>
       );
-    case 'addMovieSuccess':
+    case ADD_SUCCESS_MODUL:
       return (
         <Modal open={show} onClose={handleCloseModal} title='CONGRATULATIONS !' tick>
           <center>The movie has been added to <br />database successfully</center>

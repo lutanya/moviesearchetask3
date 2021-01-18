@@ -1,9 +1,6 @@
 import React from 'react';
 import {Logo} from '../Logo/Logo';
-import {StyledButton} from '../Button/StyledButton';
-import {StyledHeader, SearchArea, StyledAddButton} from './StyledHeader.js';
-import {connect} from 'react-redux';
-import {openModalByType} from '../../redux/action';
+import {StyledHeader} from './StyledHeader.js';
 import './header.css';
 import PropTypes from 'prop-types';
 

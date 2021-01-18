@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, {useRef, useState} from 'react';
 import {StyledButton} from '../Button/StyledButton';
 import {SearchArea, StyledAddButton} from '../Header/StyledHeader.js';
 import {connect} from 'react-redux';
 import {openModalByType} from '../../redux/action';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const HeaderOption = ({handleOpenModal}) => {
   const [input, setInput] = useState('');
@@ -12,10 +12,10 @@ const HeaderOption = ({handleOpenModal}) => {
   let link = useRef(null);
 
   function handleKeypress(event) {
-  if (event.key === "Enter") {
-    link.click();
-  }
-};
+    if (event.key === 'Enter') {
+      link.click();
+    }
+  };
 
   return (
     <>
@@ -24,20 +24,21 @@ const HeaderOption = ({handleOpenModal}) => {
       </StyledButton>
       <p>FIND YOUR MOVIE</p>
       <SearchArea>
-        <input 
-          value={input} 
-          onInput={e => setInput(e.target.value)} 
+        <input
+          value={input}
+          onInput={(e) => setInput(e.target.value)}
           onKeyPress={handleKeypress}
-          placeholder='What do you want to watch?' 
-          id='searchParam'/>
+          placeholder='What do you want to watch?'
+          id='searchParam'
+        />
         <StyledButton colored onClick={()=>link.click()}>
-          <Link 
-            to={`/search?title=${input}`} 
-            style={{ textDecoration: 'none', color: 'inherit' }} 
-            ref={node => (link = node)}
+          <Link
+            to={`/search?title=${input}`}
+            style={{textDecoration: 'none', color: 'inherit'}}
+            ref={(node) => (link = node)}
           >
             SEARCH
-          </Link> 
+          </Link>
         </StyledButton>
       </SearchArea>
     </>
@@ -49,7 +50,7 @@ const HeaderOption = ({handleOpenModal}) => {
  */
 function mapDispatchToProps(dispatch) {
   return {
-    handleOpenModal: type => dispatch(openModalByType(type)),
+    handleOpenModal: (type) => dispatch(openModalByType(type)),
   };
 }
 

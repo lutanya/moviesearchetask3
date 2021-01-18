@@ -1,5 +1,3 @@
-// will be use
-
 import React from 'react';
 import {
   BrowserRouter as Router,
@@ -12,13 +10,11 @@ import MovieDetails from '../MovieDetails/MovieDetails';
 import HeaderOption from '../HeaderOption/HeaderOption';
 
 export default function Navigation() {
-  const headerComponent = <HeaderOption />
-  const movieComponent = <MovieDetails />
+  const headerComponent = <HeaderOption />;
+  const movieComponent = <MovieDetails />;
   return (
     <Router>
       <Switch>
-
-
         <Route path={`/film/:movieId`}>
           <App component={movieComponent} />
         </Route>
