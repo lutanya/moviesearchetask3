@@ -1,17 +1,17 @@
 import React, {useMemo, useState} from 'react';
 import {connect} from 'react-redux';
-import {fetchBySortParam} from '../../redux/action';
+import {fetchMovies} from '../../redux/action';
 import PropTypes from 'prop-types';
 import {useHistory} from 'react-router';
 
-function BindDropDown({values, fetchMovies}) {
+function BindDropDown({values, fetchMovies, searchParam}) {
   const [value, setValue] = useState('0');
   const history = useHistory();
   function handleChange(event) {
     const currentVal = event.target.value;
     setValue(currentVal);
     history.push('/');
-    fetchMovies(values[parseInt(currentVal)].name);
+    fetchMovies(searchParam, values[parseInt(currentVal)].name);
   }
 
   const optionTemplate = useMemo(() => values.map((v) => (
@@ -30,13 +30,17 @@ BindDropDown.propTypes = {
   fetchMovies: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  searchParam: state.filter.params.search,
+});
+
 /**
  * @param dispatch
  */
 function mapDispatchToProps(dispatch) {
   return {
-    fetchMovies: (param) => dispatch(fetchBySortParam(param)),
+    fetchMovies: (searchParam, sortParam) => dispatch(fetchMovies(searchParam, sortParam)),
   };
 }
 
-export default connect(null, mapDispatchToProps)(BindDropDown);
+export default connect(mapStateToProps, mapDispatchToProps)(BindDropDown);

@@ -10,70 +10,58 @@ import {
   CHANGE_CHECKBOX_VALUES,
 } from './types';
 
-export const handleAddMovie = (movie) => {
-  const url = new URL('http://localhost:4000/movies');
-  return (dispatch) => {
-    axios
-        .post(url, movie)
-        .then((response) => dispatch(addMovieSuccess(response.data)))
-        .catch((error) => dispatch(fetchFailure(error.message)));
-  };
-};
+//filter actions
 
-export const handleEditMovie = (movie) => {
-  const url = new URL('http://localhost:4000/movies');
-  return (dispatch) => {
-    axios
-        .put(url, movie)
-        .then(() => dispatch(closeModal()))
-        .catch((error) => dispatch(fetchFailure(error.message)));
-  };
-};
+const API_ROOT="http://localhost:4000";
 
-export const handleDeleteMovie = (movie) => {
-  const url = new URL(`http://localhost:4000/movies/${movie.id}`);
-  return (dispatch) => {
-    axios
-        .delete(url)
-        .then(() => dispatch(closeModal()))
-        .catch((error) => dispatch(fetchFailure(error.message)));
-  };
-};
+function populateParamsToUrl(url, params) {
+  if (params !== null) {
+    return Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
+  }
+}
 
-export const fetchMovies = (params) => {
-  const url = new URL('http://localhost:4000/movies');
-  return (dispatch) => {
+function fetchMoviesWithParams(url, searchParam, sortParam) {
+  return dispatch => {
     dispatch(fetchStarted());
-    if (params != null) {
-      Object.keys(params).forEach((key) => url.searchParams.append(key, params[key]));
-    }
     axios
-        .get(url)
-        .then((res) => {
-          dispatch(fetchSuccess(res.data.data));
-        })
-        .catch((err) => {
-          dispatch(fetchFailure(err.message));
-        });
+      .get(url)
+      .then((res) => {
+        dispatch(fetchSuccess(res.data.data, searchParam, sortParam));
+      })
   };
+}
+
+export const fetchMovies = (searchParam, sortParam) => {
+  let search = null;
+  let sort = null;
+  if (searchParam !== null && sortParam !==undefined && searchParam !== 'ALL' ) {
+    search = {
+      searchBy: 'genres',
+      search: searchParam.toLowerCase()
+    }
+  };
+  if (sortParam !== null && sortParam!==undefined) {
+    sort = {
+      sortBy: sortParam.toLowerCase().replace(' ', '_'),
+      sortOrder: 'desc'
+    }
+  };
+  const url = new URL(`${API_ROOT}/movies`);
+  populateParamsToUrl(url, search);
+  populateParamsToUrl(url, sort);
+  return fetchMoviesWithParams(url, searchParam, sortParam)
 };
 
-
-export const fetchByGenre = (genre) => {
-  const params =
-    genre != undefined && genre != 'ALL' ?
-      {searchBy: 'genres', search: genre.toLowerCase()} :
-      null;
-  return fetchMovies(params);
+export const searchMovie = (searchParam) => {
+  const url = new URL(`${API_ROOT}/movies/?search=${searchParam}&searchBy=title`);
+  return fetchMoviesWithParams(url)
 };
 
-export const fetchBySortParam = (sortParam) => {
-  return fetchMovies({sortBy: sortParam.toLowerCase().replace(' ', '_'), sortOrder: 'desc'});
-};
-
-const fetchSuccess = (movies) => ({
+const fetchSuccess = (movies, searchParam, sortParam) => ({
   type: FETCH_BY_GENRE_SUCCESS,
   payload: movies,
+  searchParam,
+  sortParam
 });
 
 const fetchStarted = () => ({
@@ -82,8 +70,42 @@ const fetchStarted = () => ({
 
 const fetchFailure = (error) => ({
   type: FETCH_BY_GENRE_FAILURE,
-  error: error,
+  error,
 });
+
+//modal actions
+
+export const handleAddMovie = (movie) => {
+  const url = new URL('http://localhost:4000/movies');
+  return (dispatch) => {
+    axios
+      .post(url, movie)
+      .then((response) => dispatch(addMovieSuccess(response.data)))
+      .catch((error) => dispatch(fetchFailure(error.message)));
+  };
+};
+
+export const handleEditMovie = (movie) => {
+  const url = new URL('http://localhost:4000/movies');
+  return (dispatch) => {
+    axios
+      .put(url, movie)
+      .then(() => dispatch(closeModal()))
+      .catch((error) => dispatch(fetchFailure(error.message)));
+  };
+};
+
+export const handleDeleteMovie = (movie) => {
+  const url = new URL(`http://localhost:4000/movies/${movie.id}`);
+  return (dispatch) => {
+    axios
+      .delete(url)
+      .then(() => dispatch(closeModal()))
+      .catch((error) => dispatch(fetchFailure(error.message)));
+  };
+};
+
+
 
 export const openModalByType = (type, movie) => ({
   type: OPEN_MODAL_BY_TYPE,
@@ -101,23 +123,6 @@ export const openModalByType = (type, movie) => ({
     null,
   genres: movie !== undefined ? movie.genres : null,
 });
-
-
-export const searchMovie = (searchParam) => {
-  const url = new URL(`http://localhost:4000/movies/?search=${searchParam}&searchBy=title`);
-  return (dispatch) => {
-    dispatch(fetchStarted());
-    axios
-        .get(url)
-        .then((res) => {
-          dispatch(fetchSuccess(res.data.data));
-        })
-        .catch((err) => {
-          dispatch(fetchFailure(err.message));
-        });
-  };
-};
-
 
 export const closeModal = () => ({
   type: CLOSE_MODAL_BY_TYPE,
@@ -139,10 +144,10 @@ export const handleChangeCheckbox = (id) => ({
 });
 
 export const handleFormErrors = (errors) =>
-  ({
-    type: 'HANDLE_ERRORS',
-    errors: errors,
-  });
+({
+  type: 'HANDLE_ERRORS',
+  errors: errors,
+});
 
 export const addMovieSuccess = () => ({
   type: OPEN_MODAL_BY_TYPE,

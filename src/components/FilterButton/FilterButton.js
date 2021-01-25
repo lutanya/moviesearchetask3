@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {StyledFilterButton} from './StyledFilterButton';
 import {connect} from 'react-redux';
-import {fetchByGenre} from '../../redux/action';
+import {fetchMovies} from '../../redux/action';
 import {useCallback} from 'react';
 import {useHistory} from 'react-router';
 
@@ -11,12 +11,12 @@ import {useHistory} from 'react-router';
  * @param {Function} fetchByGenreProp search function
  * @return {Element} search burron on the search pane
  */
-function FilterButton({genre, fetchByGenreProp}) {
+function FilterButton({genre, fetchByGenreProp, sortParam}) {
   const history = useHistory();
-  const fetchMovie = useCallback(() => {
+  const fetchMovie = () => {
     history.push('/');
-    fetchByGenreProp(genre);
-  }, [genre]);
+    fetchByGenreProp(genre, sortParam);
+  };
   return (
     <StyledFilterButton onClick={fetchMovie}>
       {genre}
@@ -29,13 +29,17 @@ FilterButton.propTypes = {
   fetchByGenreProp: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  sortParam: state.filter.params.sort,
+});
+
 /**
  * @param dispatch
  */
 function mapDispatchToProps(dispatch) {
   return {
-    fetchByGenreProp: (genre) => dispatch(fetchByGenre(genre)),
+    fetchByGenreProp: (genre, sortParam) => dispatch(fetchMovies(genre, sortParam)),
   };
 }
 
-export default connect(null, mapDispatchToProps)(FilterButton);
+export default connect(mapStateToProps, mapDispatchToProps)(FilterButton);

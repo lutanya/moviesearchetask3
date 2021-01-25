@@ -4,10 +4,14 @@ import {
   FETCH_BY_GENRE_STARTED,
 } from '../action/types';
 
-const initialState = {
+export const initialState = {
   movies: [],
   error: null,
   loading: false,
+  params:{
+    search: null,
+    sort: 'REALEASE DATE'
+  }
 };
 
 /**
@@ -23,12 +27,15 @@ export default function filter(state = initialState, action) {
         loading: true,
       };
     case FETCH_BY_GENRE_SUCCESS:
-
       return {
         ...state,
         loading: false,
         error: null,
         movies: action.payload,
+        params: {
+          search: action.searchParam,
+          sort: action.sortParam,
+        }
       };
     case FETCH_BY_GENRE_FAILURE:
       return {

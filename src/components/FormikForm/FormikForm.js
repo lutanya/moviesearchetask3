@@ -15,16 +15,28 @@ const fields = [
   {key: 'runtime', label: 'RUNTIME', placeholder: 'Runtime here', type: 'text'},
 ];
 
+const formInitValues=(movie)=>{
+  return{
+    id: movie? movie.id : '',
+    title: movie ? movie.title : '',
+    release_date: movie ? movie.release_date : '',
+    poster_path: movie ? movie.poster_path : '',
+    genres: movie ? movie.genres : '',
+    overview: movie ? movie.overview : '',
+    runtime: movie ? movie.runtime : '',
+  }
+  }
+
 const InputField = (props) => {
   const [
     field,
     {error, touched},
   ] = useField(props);
   return (
-    <StyledInput>
+    <>
       <input {...field} {...props} />
       {error && touched && <span >{error}</span>}
-    </StyledInput>
+    </>
   );
 };
 
@@ -57,16 +69,7 @@ const FormikForm = (
     },
 ) => (
   <Formik
-    initialValues={
-      {
-        id: movie ? movie.id : '',
-        title: movie ? movie.title : '',
-        release_date: movie ? movie.release_date : '',
-        poster_path: movie ? movie.poster_path : '',
-        genres: movie ? movie.genres : '',
-        overview: movie ? movie.overview : '',
-        runtime: movie ? movie.runtime : '',
-      }}
+    initialValues={formInitValues(movie)}
 
     validationSchema={MovieSchema}
 
@@ -78,12 +81,11 @@ const FormikForm = (
     }}
   >
     {({values, isSubmitting}) => (
-      <Form>
-
+      <Form id='myForm'>
         {
           movie ?
             <>
-              <label key="title">MOVIE ID</label>
+              <label key="movie_id">MOVIE ID</label>
               <p>{movie.id}</p>
             </> :
             null
@@ -95,16 +97,14 @@ const FormikForm = (
           type="reset"
           empty
           position={StyledResetButton}
-        >
-          RESET
+        > RESET
         </StyledButton>
         <StyledButton
           type="submit"
           disabled={isSubmitting}
           colored
           position={StyledSubmitButton}
-        >
-          {submitLable}
+        > {submitLable}
         </StyledButton>
       </Form>
     )}
